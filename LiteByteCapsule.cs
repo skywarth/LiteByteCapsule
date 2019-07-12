@@ -8,8 +8,8 @@ namespace LiteBiteCapsule
 {
     class LiteByteCapsule
     {//
-        private CapsuleConstant[] capsulationConstants;
-        public LiteByteCapsule(CapsuleConstant[] constants)
+        private Stack<CapsuleConstant> capsulationConstants;
+        public LiteByteCapsule(Stack<CapsuleConstant> constants)
         {
             capsulationConstants = constants;
         }
@@ -21,19 +21,23 @@ namespace LiteBiteCapsule
         }
         public byte[] CheckRevSyntax(byte[] data)
         {
-            /**/
-            //int adet = stream.Read(data, 0, data.Length);
-
-            int size = data.Length;//increment for correct size, since .length gives 3 for a 4 element array.
+            bool status = false;
+            int capsuleSize = data.Length;
 
 
-            int NumberOfConst = capsulationConstants.Length;
-
-
-            byte[] InfactData = new byte[size - NumberOfConst];
+            byte[] InfactData = new byte[capsuleSize-capsulationConstants.Count];
 
             try
             {
+                for(int i = 0; i < capsuleSize; i++)
+                {
+                    if(data[i].)
+
+
+                }
+
+
+
 
                 if (data[0] == ComTitles.Head)// first head check
                 {
@@ -70,6 +74,29 @@ namespace LiteBiteCapsule
         }
         public byte[] ConvertToSyntax(byte[] infactData)
         {
+            int capsuleSize = infactData.Length + capsulationConstants.Count;
+            byte[] capsule = new byte[capsuleSize];
+            //[10] length=10, max[9]
+            foreach(CapsuleConstant c in capsulationConstants)
+            {
+                CapsuleConstant constant= capsulationConstants.Pop();
+                if (constant.Head)
+                {
+                    capsule[constant.Position] = constant.Val;
+                }
+                else
+                {
+                    capsule[capsule.Length - constant.Position-1] = constant.Val;
+                }
+                
+            }
+
+            for(int i = 0; i < capsule.Length; i++)
+            {
+                
+            }
+
+
             int size = infactData.Length;
             byte[] encodedData = new byte[size + 5];
 
@@ -100,7 +127,7 @@ namespace LiteBiteCapsule
             
             return content;
         }
-        public CapsuleConstant[] GetCapsulationConstants()
+        public Stack<CapsuleConstant> GetCapsulationConstants()
         {
             return capsulationConstants;
         }

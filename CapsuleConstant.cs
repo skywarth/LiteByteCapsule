@@ -8,7 +8,12 @@ namespace LiteBiteCapsule
 {
     class CapsuleConstant
     {
-        byte val;
-        int position;
+        private byte val;
+        private int position;//0 is first 
+        private bool head;
+
+        public byte Val { get => val; set => val = value; }
+        public int Position { get => position; set => position = value; }
+        public bool Head { get => head; set => head = value; }
     }
 }
