@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace LiteBiteCapsule
 {
@@ -79,25 +80,28 @@ namespace LiteBiteCapsule
             //[10] length=10, max[9]
             foreach(CapsuleConstant c in capsulationConstants)
             {
-                CapsuleConstant constant= capsulationConstants.Pop();
+                CapsuleConstant constant= capsulationConstants.Pop();//constant.val=5, position=2, head=true
                 if (constant.Head)
                 {
                     capsule[constant.Position] = constant.Val;
                 }
                 else
                 {
-                    capsule[capsule.Length - constant.Position-1] = constant.Val;
+                    capsule[(capsule.Length - 1) - constant.Position] = constant.Val;
                 }
-                
+               
             }
-
-            for(int i = 0; i < capsule.Length; i++)
-            {
-                
-            }
+            /*int infactStartPosition = Array.IndexOf(capsule, null);*/
+            //TODO add overload for stack to stack, create array to stack
+            CapsuleConstant maxHead = (from x in capsulationConstants where x.Head = true select x).Max();
 
 
-            int size = infactData.Length;
+            Array.Copy(infactData, 0, capsule, maxHead.Position + 1,infactData.Length);
+
+
+            /*
+             * OLD
+             * int size = infactData.Length;
             byte[] encodedData = new byte[size + 5];
 
             encodedData[0] = ComTitles.Head;
@@ -106,8 +110,8 @@ namespace LiteBiteCapsule
             Array.Copy(infactData, 0, encodedData, 3, size);
             encodedData[encodedData.Length - 1] = ComTitles.End;
             encodedData[encodedData.Length - 2] = ComputeAdditionChecksum(infactData);
-
-            return encodedData;
+            */
+            return capsule;
         }
 
         public string ConvertToString(byte[] data)

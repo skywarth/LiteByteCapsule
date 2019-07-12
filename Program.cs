@@ -53,6 +53,8 @@ namespace byteTest
             writeByteToConsole(conv);
             writeByteToConsole(CheckRevSyntax(conv));
             */
+
+            /*
             Console.WriteLine("-------");
             var watch = System.Diagnostics.Stopwatch.StartNew();
             for (int i = 0; i < 500; i++)
@@ -66,12 +68,14 @@ namespace byteTest
             }
 
 
-            /*Console.WriteLine(CheckRevSyntax(fake));
-            Console.WriteLine(CheckRevSyntax(inc2));*/
             watch.Stop();
             Console.WriteLine(watch.ElapsedMilliseconds + " ms");
-            Console.ReadKey();
+            Console.ReadKey();*/
+
+
         }
+
+        
 
         public static void writeByteToConsole(byte[] byteArray)
         {
