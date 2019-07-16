@@ -69,17 +69,17 @@ using System.Threading.Tasks;
         watch.Stop();
         Console.WriteLine(watch.ElapsedMilliseconds + " ms");
         Console.ReadKey();*/
-        Stack<CapsuleConstant> inf = new Stack<CapsuleConstant>();
-        inf.Push(new CapsuleConstant(5, 1, true));
-        inf.Push(new CapsuleConstant(111, 0, false));
-        inf.Push(new CapsuleConstant(222, 2, true));
-        inf.Push(new CapsuleConstant(172, 0, true));
-        inf.Push(new CapsuleConstant(121, 1, false));
-        inf.Push(new CapsuleConstant(31, 2, false));
-        inf.Push(new CapsuleConstant(54, 3, false));
+        Stack<CapsuleConstant> constants = new Stack<CapsuleConstant>();
+            constants.Push(new CapsuleConstant(5, 1, true));
+            constants.Push(new CapsuleConstant(111, 0, false));
+            constants.Push(new CapsuleConstant(222, 2, true));
+            constants.Push(new CapsuleConstant(172, 0, true));
+            constants.Push(new CapsuleConstant(121, 1, false));
+            constants.Push(new CapsuleConstant(31, 2, false));
+            constants.Push(new CapsuleConstant(54, 3, false));
 
 
-        LiteByteCapsule lite = new LiteByteCapsule(inf);
+        LiteByteCapsule lite = new LiteByteCapsule(constants);
         byte[] innerPackage = new byte[] { 78, 22, 11, 1, 56, 87, 244, 255, 0 };
         Console.WriteLine(lite.ConvertToString(innerPackage));
         byte[] capsule=lite.ConvertToSyntax(innerPackage);
