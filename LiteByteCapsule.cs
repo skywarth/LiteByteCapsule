@@ -71,6 +71,60 @@ using System.Linq;
         return InfactData;
     /**/
 //}
+        public byte[] CheckSyntax(byte[] capsule)
+        {
+        byte[] infactData = new byte[capsule.Length - capsulationConstants.Count];
+        byte[] capsuleClone=new byte[capsule.Length];
+        Array.Copy(capsule, capsuleClone, capsule.Length);
+        Stack<CapsuleConstant> capsuleConstantsClone = StackClone<CapsuleConstant>(capsulationConstants);
+        bool status = false;
+
+        do
+        {
+            CapsuleConstant constant = capsuleConstantsClone.Pop();
+            if (constant.Head)
+            {
+                if (capsuleClone[constant.Position] == constant.Val)
+                {
+                    status = true;
+                }
+                else
+                {
+                    status = false;
+                }
+            }
+            else
+            {
+                if (capsuleClone[(capsuleClone.Length - 1) - constant.Position] == constant.Val)
+                {
+                    status = true;
+                }
+                else
+                {
+                    status = false;
+                }
+            }
+        }
+        while (capsuleConstantsClone.Count() != 0 && status);
+        if (status)
+        {
+            CapsuleConstant maxHead = (from x in capsulationConstants where x.Head == true select x).Max();
+            //CapsuleConstant maxNonHead = (from x in capsulationConstants where x.Head != true select x).Max();
+            Array.Copy(capsuleClone, maxHead.Position+1, infactData, 0, infactData.Length);
+        }
+        else
+        {
+            infactData = null;
+        }
+
+
+
+
+        return infactData;
+
+        }
+
+
 public byte[] ConvertToSyntax(byte[] infactData)
         {
         Stack<CapsuleConstant> capsuleConstantsClone = StackClone<CapsuleConstant>(capsulationConstants);
@@ -108,9 +162,20 @@ public byte[] ConvertToSyntax(byte[] infactData)
         /*int infactStartPosition = Array.IndexOf(capsule, null);*/
         //TODO add overload for stack to stack, create array to stack
         //CapsuleConstant maxHead = (from x in capsulationConstants where x.Head = true select x).Max();
-        CapsuleConstant maxHead = capsulationConstants.MaxBy();
+        //CapsuleConstant maxHead = capsulationConstants.MaxBy();
 
-            Array.Copy(infactData, 0, capsule, maxHead.Position + 1,infactData.Length);
+        /*WORKING COMPARISON APPROACH*
+         * 
+         *CapsuleConstant maxHead = capsulationConstants.OrderByDescending(x => x.Position).First();
+         * */
+
+        /* WORKING COMPARISON 2
+         * 
+        CapsuleConstant maxHead = (from x in capsulationConstants where x.Head = true select x).Max();
+        */
+        CapsuleConstant maxHead = (from x in capsulationConstants where x.Head == true select x).Max();
+        Console.WriteLine("maxHead is=" + maxHead.Head + " " + maxHead.Position);
+        Array.Copy(infactData, 0, capsule, maxHead.Position + 1,infactData.Length);
 
 
             /*
@@ -135,7 +200,7 @@ public byte[] ConvertToSyntax(byte[] infactData)
             {
                 foreach (byte element in data)
                 {
-                    content += element;
+                    content += element+"-";
                 }
             }
             else

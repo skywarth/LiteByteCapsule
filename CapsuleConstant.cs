@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-class CapsuleConstant
+class CapsuleConstant : IComparable<CapsuleConstant>
 {
     private byte val;
     private int position;//0 is first 
@@ -21,7 +21,18 @@ class CapsuleConstant
         this.head = head;
         }
 
-
+    public int CompareTo(CapsuleConstant other)
+    {
+        return this.position.CompareTo(other.position);
+        /*if (this.head && other.head)
+        {
+            return this.position.CompareTo(other.position);
+        }
+        else
+        {
+            return -1;
+        }*/
     }
+}
 
 

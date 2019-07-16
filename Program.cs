@@ -74,12 +74,19 @@ using System.Threading.Tasks;
         inf.Push(new CapsuleConstant(111, 0, false));
         inf.Push(new CapsuleConstant(222, 2, true));
         inf.Push(new CapsuleConstant(172, 0, true));
+        inf.Push(new CapsuleConstant(121, 1, false));
+        inf.Push(new CapsuleConstant(31, 2, false));
+        inf.Push(new CapsuleConstant(54, 3, false));
 
 
         LiteByteCapsule lite = new LiteByteCapsule(inf);
         byte[] innerPackage = new byte[] { 78, 22, 11, 1, 56, 87, 244, 255, 0 };
+        Console.WriteLine(lite.ConvertToString(innerPackage));
         byte[] capsule=lite.ConvertToSyntax(innerPackage);
-        writeByteToConsole(capsule);
+        Console.WriteLine(lite.ConvertToString(capsule));
+        byte[] revInnerPackage = lite.CheckSyntax(capsule);
+        Console.WriteLine(lite.ConvertToString(revInnerPackage));
+        Console.ReadKey();
     }
         
 
