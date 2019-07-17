@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace LiteByte
 {
@@ -166,22 +167,23 @@ namespace LiteByte
         /// </summary>
         /// <param name="data">Byte array package to convert to string</param>
         /// <returns></returns>
-        public string ConvertToString(byte[] data)
+        public static string ConvertToString(byte[] data)
         {
-            string content = "";
+            StringBuilder bld = new StringBuilder();
             if (data != null)
             {
                 foreach (byte element in data)
                 {
-                    content += element + "-";
+                    bld.Append(element);
+                    bld.Append("-");
                 }
             }
             else
             {
-                content = null;
+                bld = null;
             }
-
-            return content;
+            bld.Remove(bld.Length, 1);
+            return bld.ToString();
         }
         /// <summary>
         /// A helper method to get the capsulation constants stack.
@@ -191,7 +193,7 @@ namespace LiteByte
         {
             return capsulationConstants;
         }
-        private Stack<CapsuleConstant> StackClone<CapsuleConstant>(Stack<CapsuleConstant> original)
+        private static Stack<CapsuleConstant> StackClone<CapsuleConstant>(Stack<CapsuleConstant> original)
         {
             var arr = new CapsuleConstant[original.Count];
             original.CopyTo(arr, 0);
