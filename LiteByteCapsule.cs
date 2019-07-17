@@ -52,7 +52,7 @@ namespace LiteByte
         }
 
 
-        private byte ComputeAdditionChecksum(byte[] data)
+        private static byte ComputeAdditionChecksum(byte[] data)
         {
             long longSum = data.Sum(x => (long)x);//long overflow engellemek için (uzun bir streamde)
             return unchecked((byte)longSum);
@@ -103,7 +103,6 @@ namespace LiteByte
             if (status)
             {
                 CapsuleConstant maxHead = (from x in capsulationConstants where x.Head == true select x).Max();
-                //CapsuleConstant maxNonHead = (from x in capsulationConstants where x.Head != true select x).Max();
                 Array.Copy(capsuleClone, maxHead.Position + 1, infactData, 0, infactData.Length);
             }
             else
@@ -145,17 +144,6 @@ namespace LiteByte
             }
 
             //DONE add overload for stack to stack, create array to stack UNDONE
-            
-
-            /*WORKING COMPARISON APPROACH*
-             * 
-             *CapsuleConstant maxHead = capsulationConstants.OrderByDescending(x => x.Position).First();
-             * */
-
-            /* WORKING COMPARISON 2
-             * 
-            CapsuleConstant maxHead = (from x in capsulationConstants where x.Head = true select x).Max();
-            */
             CapsuleConstant maxHead = (from x in capsulationConstants where x.Head == true select x).Max();
             Array.Copy(infactData, 0, capsule, maxHead.Position + 1, infactData.Length);
 
