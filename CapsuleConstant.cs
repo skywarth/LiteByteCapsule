@@ -42,6 +42,55 @@ namespace LiteByte{
             this.head = head;
         }
 
+        private CapsuleConstant(byte value,int headCounter, int tailCounter,bool head)
+        {
+            this.val = value;
+            if (head)
+            {
+                this.position = headCounter;
+            }
+            else
+            {
+                this.position = tailCounter;
+            }
+            this.head = head;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        public static Stack<CapsuleConstant> GenerateCapsulationConstants(int amount)
+        {
+            Stack<CapsuleConstant> capsuleConstants = new Stack<CapsuleConstant>();
+            Random rnd = new Random();
+            int headCounter = -1;
+            int tailCounter = -1;
+            bool head;
+            for (int i = 0; i < amount; i++)
+            {//TODO stack to string conversion for console writeline, string
+                
+                if (rnd.NextDouble() >= 0.5)
+                {//TODO capsuleconstant stack push with values other than with intstance/object
+                    head = true;
+                    headCounter++;
+                    
+                }
+                else
+                {
+                    head = false;
+                    tailCounter++;
+                    
+                }
+                capsuleConstants.Push(new CapsuleConstant((byte)(rnd.Next(0, 255)), headCounter, tailCounter, head));
+
+            }
+
+            return capsuleConstants;
+        }
+
         /// <summary>
         /// Implementation of IEnumarable 
         /// </summary>
