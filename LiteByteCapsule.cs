@@ -180,7 +180,7 @@ namespace LiteByte
             }
             else
             {
-                bld = null;
+                throw new ArgumentNullException();
             }
             if(bld !=null)
             {
