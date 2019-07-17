@@ -212,7 +212,7 @@ namespace LiteByte
             CapsuleConstant maxHead = (from x in capsulationConstants where x.Head = true select x).Max();
             */
             CapsuleConstant maxHead = (from x in capsulationConstants where x.Head == true select x).Max();
-            Console.WriteLine("maxHead is=" + maxHead.Head + " " + maxHead.Position);
+            //Console.WriteLine("maxHead is=" + maxHead.Head + " " + maxHead.Position);
             Array.Copy(infactData, 0, capsule, maxHead.Position + 1, infactData.Length);
 
 
