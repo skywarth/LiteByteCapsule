@@ -1,3 +1,5 @@
+*NuGet Package: https://www.nuget.org/packages/LiteByteCapsule/*
+
 # **To be added later. For now, basic usage:**
 
 ## First create a stack of capsulation constants using CapsuleConstant class
