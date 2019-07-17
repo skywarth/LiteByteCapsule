@@ -182,7 +182,11 @@ namespace LiteByte
             {
                 bld = null;
             }
-            bld.Remove(bld.Length, 1);
+            if(bld !=null)
+            {
+                bld.Remove(bld.Length, 1);
+            }
+            
             return bld.ToString();
         }
         /// <summary>
