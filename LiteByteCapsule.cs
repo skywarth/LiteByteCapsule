@@ -9,12 +9,47 @@ namespace LiteByte
 
 
     public class LiteByteCapsule
-    {//
+    {
+
         private Stack<CapsuleConstant> capsulationConstants;
+        /// <summary>
+        /// Base overload of costructor for LiteByteCapsule. 
+        /// </summary>
+        /// <param name="constants">This parameter is used for capsulationConstants across the instance of LiteByteCapsule.</param>
         public LiteByteCapsule(Stack<CapsuleConstant> constants)
         {
             capsulationConstants = constants;
         }
+
+
+
+        /// <summary>
+        /// This overload of constructor takes two different byte arrays to convert into CapsuleConstant type of stack.
+        /// If you need to access capsulation constants stack, just call GetCapsulationConstants() to get the stack.
+        /// </summary>
+        /// <param name="constantFirstPart">Counting from the head, zero based. Positions are exact.</param>
+        /// <param name="constantLastPart">Counting from the end, zero based. First element of the array will be the last element of capsule.</param>
+        public LiteByteCapsule(byte[] constantFirstPart, byte[] constantLastPart)
+        {
+            byte[] joint = new byte[constantFirstPart.Length + constantLastPart.Length];
+            if (constantFirstPart != null)
+            {
+                for(int i = 0; i < constantFirstPart.Length; i++)
+                {//TODO individual null check
+                    capsulationConstants.Push(new CapsuleConstant(constantFirstPart[i], i, true));
+                }
+            }
+            
+            
+            if (constantLastPart != null)
+            {
+                for(int k = 0; k < constantLastPart.Length; k++)
+                { 
+                    capsulationConstants.Push(new CapsuleConstant(constantLastPart[k], (joint.Length-1)-k,false));
+                }
+            }
+        }
+
 
         private byte ComputeAdditionChecksum(byte[] data)
         {

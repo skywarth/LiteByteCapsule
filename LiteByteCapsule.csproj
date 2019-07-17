@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Authors>Yiğit Kürşad Ersoy</Authors>
     <Company />
     <Description>LiteByteCapsule is a NuGet package to apply capsulation for byte arrays which is used for sending them over TCP IP protocol or socket.</Description>
@@ -11,7 +12,9 @@
     <PackageTags>byte array, byte, tcp, socket, capsulation, byte capsule, package encryption</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>Pre-Alpha version, use with caution. Tests are not compeleted yet. Only basic test has been applied and succeded.</PackageReleaseNotes>
-    <Version>1.0.2</Version>
+    <Version>1.0.4</Version>
+    <PackageIconUrl>https://raw.githubusercontent.com/skywarth/LiteByteCapsule/LibraryVersion/medicines.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/skywarth/LiteByteCapsule</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
