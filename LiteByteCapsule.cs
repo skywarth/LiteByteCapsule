@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LiteByte
 {
 
-
+    /// <summary>
+    /// Create an instance of this class in order to use capsulation methods. Main class for the package/library.
+    /// </summary>
     public class LiteByteCapsule
     {
 
@@ -56,7 +56,14 @@ namespace LiteByte
             long longSum = data.Sum(x => (long)x);//long overflow engellemek için (uzun bir streamde)
             return unchecked((byte)longSum);
         }
-        
+
+        //TODO Make an overload method or new method for random constant creation based on number provided. (for ex: 100 random constants)
+
+        /// <summary>
+        /// This method is used to check the syntax of a provided (or incoming) byte array package based on the LiteByteCapsule instance constant stack sequence.
+        /// </summary>
+        /// <param name="capsule">Byte array package to check the syntax according to LiteByteCapsule instance constant sequence</param>
+        /// <returns></returns>
         public byte[] CheckSyntax(byte[] capsule)
         {
             byte[] infactData = new byte[capsule.Length - capsulationConstants.Count];
@@ -110,7 +117,11 @@ namespace LiteByte
 
         }
 
-
+        /// <summary>
+        /// Converts the provided byte array (inner) package to desired capsule format.
+        /// </summary>
+        /// <param name="infactData">Inner package byte array to capsulate with capsulation constants.</param>
+        /// <returns></returns>
         public byte[] ConvertToSyntax(byte[] infactData)
         {
             Stack<CapsuleConstant> capsuleConstantsClone = StackClone<CapsuleConstant>(capsulationConstants);
@@ -132,7 +143,7 @@ namespace LiteByte
                 }
             }
 
-            //TODO add overload for stack to stack, create array to stack
+            //DONE add overload for stack to stack, create array to stack UNDONE
             
 
             /*WORKING COMPARISON APPROACH*
@@ -150,6 +161,11 @@ namespace LiteByte
             return capsule;
         }
 
+        /// <summary>
+        /// Converts the given byte array to string with dashes between each element.
+        /// </summary>
+        /// <param name="data">Byte array package to convert to string</param>
+        /// <returns></returns>
         public string ConvertToString(byte[] data)
         {
             string content = "";
@@ -167,11 +183,15 @@ namespace LiteByte
 
             return content;
         }
+        /// <summary>
+        /// A helper method to get the capsulation constants stack.
+        /// </summary>
+        /// <returns>Returns capsulation constants stack.</returns>
         public Stack<CapsuleConstant> GetCapsulationConstants()
         {
             return capsulationConstants;
         }
-        public Stack<CapsuleConstant> StackClone<CapsuleConstant>(Stack<CapsuleConstant> original)
+        private Stack<CapsuleConstant> StackClone<CapsuleConstant>(Stack<CapsuleConstant> original)
         {
             var arr = new CapsuleConstant[original.Count];
             original.CopyTo(arr, 0);

@@ -11,8 +11,8 @@
     <RepositoryType>Github/Open Source</RepositoryType>
     <PackageTags>byte array, byte, tcp, socket, capsulation, byte capsule, package encryption</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>Pre-Alpha version, use with caution. Tests are not compeleted yet. Only basic test has been applied and succeded.</PackageReleaseNotes>
-    <Version>1.0.4</Version>
+    <PackageReleaseNotes>Alpha version, use with caution. Tests are not compeleted yet, no exception controls. Only basic test has been applied and succeded.</PackageReleaseNotes>
+    <Version>1.0.5</Version>
     <PackageIconUrl>https://raw.githubusercontent.com/skywarth/LiteByteCapsule/LibraryVersion/medicines.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/skywarth/LiteByteCapsule</PackageProjectUrl>
   </PropertyGroup>
