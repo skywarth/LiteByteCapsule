@@ -2,6 +2,8 @@
 
 # **To be added later. For now, basic usage:**
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/882bb0b335ad43d5abca6bd5150ce81d)](https://app.codacy.com/app/skywarth/LiteByteCapsule?utm_source=github.com&utm_medium=referral&utm_content=skywarth/LiteByteCapsule&utm_campaign=Badge_Grade_Dashboard)
+
 ## First create a stack of capsulation constants using CapsuleConstant class
 ```
 Stack<CapsuleConstant> constants = new Stack<CapsuleConstant>();
