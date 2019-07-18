@@ -30,7 +30,7 @@ namespace LiteByte{
         public bool Head { get => head; set => head = value; }
 
         /// <summary>
-        /// Sole constructor of CapsuleConstant class to initiate instances.
+        /// Base constructor of CapsuleConstant class to initiate instances.
         /// </summary>
         /// <param name="value"></param>
         /// <param name="position"></param>
@@ -38,6 +38,10 @@ namespace LiteByte{
         public CapsuleConstant(byte value, int position, bool head)
         {
             this.val = value;
+            if (position < 0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
             this.position = position;
             this.head = head;
         }
