@@ -29,15 +29,6 @@ steps:
   inputs:
     version: 2.2.103
 
-    
-# build all projects
-- task: DotNetCoreCLI@2
-  displayName: dotnet build
-  inputs:
-    projects: 'src/**/*.csproj'
-    arguments: '--configuration $(BuildConfiguration)'
-
-
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
@@ -49,17 +40,8 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-    
-    
-        
-# Run all tests with "/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura" to generate the code coverage file
-- task: DotNetCoreCLI@2
-  displayName: dotnet test
-  inputs:
-    command: test
     arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
-    projects: 'tests/**/*.csproj'
-    nobuild: true
+
     
 
 # Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
