@@ -2,6 +2,7 @@ using System;
 using Xunit;
 using Moq;
 using LiteByte;
+using System.Collections.Generic;
 
 namespace XUnitTestNETCore1
 
@@ -15,7 +16,7 @@ namespace XUnitTestNETCore1
             byte val = (byte)rnd.Next(0, 255);
             int pos = rnd.Next();
             bool head;
-            if(rnd.NextDouble() >= 0.5)
+            if (rnd.NextDouble() >= 0.5)
             {
                 head = true;
             }
@@ -27,13 +28,13 @@ namespace XUnitTestNETCore1
             CapsuleConstant constantObj2 = new CapsuleConstant(val, pos, head);
             Assert.NotNull(constantObj1);
             Assert.IsType<CapsuleConstant>(constantObj1);
-            Assert.Equal(constantObj1,constantObj2);
+            Assert.Equal(constantObj1, constantObj2);
             Assert.InRange(constantObj1.Val, 0, 255);
             Assert.InRange(constantObj1.Position, 0, int.MaxValue);
-            
 
 
-           
+
+
         }
         [Fact]
         public void BaseConstructorNegative()
@@ -52,6 +53,18 @@ namespace XUnitTestNETCore1
             }
             Assert.Throws<ArgumentOutOfRangeException>(delegate { CapsuleConstant constant = new CapsuleConstant(val, pos, head); });
 
+        }
+
+
+        [Theory]
+        [InlineData(int.MinValue)]
+        [InlineData(-1)]
+        [InlineData(-200)]
+        public void GenerateRandomBoundary(int val)
+        {
+            Stack<CapsuleConstant> capsulationConstants = new Stack<CapsuleConstant>();
+            Assert.Throws<ArgumentOutOfRangeException>(delegate { CapsuleConstant.GenerateCapsulationConstants(val); });
+            
         }
 
     }

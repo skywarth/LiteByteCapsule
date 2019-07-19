@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+
 
 namespace LiteByte{
 
@@ -64,15 +66,25 @@ namespace LiteByte{
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="amount"></param>
+        /// <param name="amount">Values which vary from 1 to int.max()</param>
         /// <returns></returns>
         public static Stack<CapsuleConstant> GenerateCapsulationConstants(int amount)
         {
+
+            try
+            {
+                uint unsignedAmount = Convert.ToUInt32(amount);
+            }
+            catch (Exception)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
             Stack<CapsuleConstant> capsuleConstants = new Stack<CapsuleConstant>();
             Random rnd = new Random();
             int headCounter = -1;
             int tailCounter = -1;
             bool head;
+            
             for (int i = 0; i < amount; i++)
             {//TODO stack to string conversion for console writeline, string
                 
