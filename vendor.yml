@@ -8,7 +8,7 @@
 # `test/test_blob.rb#test_vendored` if you make any changes.
 
 ## Vendor Conventions ##
-
+project.language       #=> "C#"
 # Caches
 - (^|/)cache/
 
