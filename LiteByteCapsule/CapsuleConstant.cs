@@ -89,7 +89,7 @@ namespace LiteByte{
             {//TODO stack to string conversion for console writeline, string
                 
                 if (rnd.NextDouble() >= 0.5)
-                {//TODO capsuleconstant stack push with values other than with intstance/object
+                {
                     head = true;
                     headCounter++;
                     
@@ -98,7 +98,7 @@ namespace LiteByte{
                 {
                     head = false;
                     tailCounter++;
-                    
+                    //TODO method for searching capsulation stack for certain stuff
                 }
                 capsuleConstants.Push(new CapsuleConstant((byte)(rnd.Next(0, 255)), headCounter, tailCounter, head));
 

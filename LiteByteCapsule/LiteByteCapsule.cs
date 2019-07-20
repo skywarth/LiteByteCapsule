@@ -58,7 +58,7 @@ namespace LiteByte
             return unchecked((byte)longSum);
         }
 
-        //TODO Make an overload method or new method for random constant creation based on number provided. (for ex: 100 random constants)
+        //DONE Make an overload method or new method for random constant creation based on number provided. (for ex: 100 random constants)
 
         /// <summary>
         /// This method is used to check the syntax of a provided (or incoming) byte array package based on the LiteByteCapsule instance constant stack sequence.

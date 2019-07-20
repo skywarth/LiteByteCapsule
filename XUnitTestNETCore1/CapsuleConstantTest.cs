@@ -10,7 +10,7 @@ namespace XUnitTestNETCore1
     public class CapsuleConstantTest
     {
         [Fact]
-        public void BaseConstructorRandom()
+        public void BaseConstructor_Base()
         {
             Random rnd = new Random();
             byte val = (byte)rnd.Next(0, 255);
@@ -37,7 +37,7 @@ namespace XUnitTestNETCore1
 
         }
         [Fact]
-        public void BaseConstructorNegative()
+        public void BaseConstructor_Negative()
         {
             byte val = 255;
             int pos = -123123123;
@@ -51,7 +51,7 @@ namespace XUnitTestNETCore1
             {
                 head = false;
             }
-            Assert.Throws<ArgumentOutOfRangeException>(delegate { CapsuleConstant constant = new CapsuleConstant(val, pos, head); });
+            Assert.Throws<ArgumentOutOfRangeException>(delegate {new CapsuleConstant(val, pos, head); });
 
         }
 
@@ -60,10 +60,32 @@ namespace XUnitTestNETCore1
         [InlineData(int.MinValue)]
         [InlineData(-1)]
         [InlineData(-200)]
-        public void GenerateRandomBoundary(int val)
+        public void GenerateRandom_Boundary(int val)
         {
             Stack<CapsuleConstant> capsulationConstants = new Stack<CapsuleConstant>();
             Assert.Throws<ArgumentOutOfRangeException>(delegate { CapsuleConstant.GenerateCapsulationConstants(val); });
+            
+        }
+
+        [Fact]
+        public void GenerateRandom_Count()
+        {//FIXME Memory problem
+            Stack<CapsuleConstant> capsulationConstants = new Stack<CapsuleConstant>();
+            Random rnd = new Random();
+            int amount=rnd.Next(0, 1000);
+            Assert.Equal(amount, (CapsuleConstant.GenerateCapsulationConstants(amount)).Count);
+
+        }
+        //TODO test generateRandom for int.MaxValue exception throw(also implement)
+        [Fact]
+        public void GenerateRandom_Base()
+        {
+            Stack<CapsuleConstant> capsulationConstants;
+            Random rnd = new Random();
+            int amout = rnd.Next(0, 100);
+            capsulationConstants=CapsuleConstant.GenerateCapsulationConstants(amout);
+            Assert.NotNull(capsulationConstants);
+            Assert.NotEmpty(capsulationConstants);
             
         }
 

@@ -11,10 +11,12 @@
     <RepositoryType>Github/Open Source</RepositoryType>
     <PackageTags>byte array, byte, tcp, socket, capsulation, byte capsule, package encryption</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>Alpha version, use with caution. Tests are not compeleted yet, no exception controls. Only basic test has been applied and succeded.
+    <PackageReleaseNotes>Exception handlings has been incresed, exceptions are being thrown in certain cases in this vers.
+Check Github repo for code coverage status.
+Alpha version, use with caution. Tests are not compeleted yet, no exception controls. Only basic test has been applied and succeded.
 
 Implementation of random constant stack is ready for test.</PackageReleaseNotes>
-    <Version>1.0.8</Version>
+    <Version>1.1.0</Version>
     <PackageIconUrl>https://raw.githubusercontent.com/skywarth/LiteByteCapsule/LibraryVersion/medicines.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/skywarth/LiteByteCapsule</PackageProjectUrl>
   </PropertyGroup>
