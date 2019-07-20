@@ -58,7 +58,7 @@ namespace LiteByte
                 }
             }
             
-            
+            //TODO create a method for smart capsule constant creation
             if (constantLastPart != null)
             {
                 for(int k = 0; k < constantLastPart.Length; k++)

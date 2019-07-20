@@ -24,7 +24,7 @@ namespace XUnitTestNETCore1
         [Fact]
         public void BaseConstructor_Null()
         {
-            Assert.Throws<ArgumentNullException>(delegate { LiteByteCapsule lite = new LiteByteCapsule(null); });
+            Assert.Throws<ArgumentNullException>(delegate { new LiteByteCapsule(null); });
 
         }
 
@@ -32,7 +32,7 @@ namespace XUnitTestNETCore1
         public void BaseConstructor_Empty()
         {
 
-            Assert.Throws<ArgumentException>(delegate { LiteByteCapsule lite = new LiteByteCapsule(CapsuleConstant.GenerateCapsulationConstants(0)); });
+            Assert.Throws<ArgumentException>(delegate {new LiteByteCapsule(CapsuleConstant.GenerateCapsulationConstants(0)); });
         }
         [Fact]
         public void ByteArrayConstructor_Base()
