@@ -19,7 +19,21 @@ namespace LiteByte
         /// <param name="constants">This parameter is used for capsulationConstants across the instance of LiteByteCapsule.</param>
         public LiteByteCapsule(Stack<CapsuleConstant> constants)
         {
-            capsulationConstants = constants;
+            /*
+             * capsulationConstants = constants;
+             * Old, guess it's referencing, not copying
+             **/
+             //TODO null check
+             if(constants==null)
+            {
+                throw new ArgumentNullException("constants", "Stack parameter cannot be null");
+            }//TODO BIG messages for exceptions (all)
+             else if (constants.Count.Equals(0))
+            {
+                throw new ArgumentException("Stack parameter cannot be empty","constants");
+            }
+            
+            capsulationConstants = StackClone<CapsuleConstant>(constants);
         }
 
 
@@ -185,12 +199,20 @@ namespace LiteByte
         {
             return capsulationConstants;
         }
-        private static Stack<CapsuleConstant> StackClone<CapsuleConstant>(Stack<CapsuleConstant> original)
+        private static Stack<T> StackClone<T>(Stack<T> original)
         {
-            var arr = new CapsuleConstant[original.Count];
-            original.CopyTo(arr, 0);
-            Array.Reverse(arr);
-            return new Stack<CapsuleConstant>(arr);
+            try
+            {//UNDONE exception handling
+                var arr = new T[original.Count];
+                original.CopyTo(arr, 0);
+                Array.Reverse(arr);
+                return new Stack<T>(arr);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
     }
