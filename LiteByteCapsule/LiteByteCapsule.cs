@@ -46,6 +46,9 @@ namespace LiteByte
         /// <param name="constantLastPart">Counting from the end, zero based. First element of the array will be the last element of capsule.</param>
         public LiteByteCapsule(byte[] constantFirstPart, byte[] constantLastPart)
         {
+            capsulationConstants = new Stack<CapsuleConstant>();
+            
+            
             byte[] joint = new byte[constantFirstPart.Length + constantLastPart.Length];
             if (constantFirstPart != null)
             {
@@ -63,6 +66,8 @@ namespace LiteByte
                     capsulationConstants.Push(new CapsuleConstant(constantLastPart[k], (joint.Length-1)-k,false));
                 }
             }
+            
+            
         }
 
 
@@ -197,21 +202,20 @@ namespace LiteByte
         /// <returns>Returns capsulation constants stack.</returns>
         public Stack<CapsuleConstant> GetCapsulationConstants()
         {
+            if(capsulationConstants==null)
+            {
+                throw new NullReferenceException("CapsulationConstants stack is null");
+            }
             return capsulationConstants;
         }
         private static Stack<T> StackClone<T>(Stack<T> original)
         {
-            try
-            {//UNDONE exception handling
+           
                 var arr = new T[original.Count];
                 original.CopyTo(arr, 0);
                 Array.Reverse(arr);
                 return new Stack<T>(arr);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            
             
         }
 

@@ -34,7 +34,27 @@ namespace XUnitTestNETCore1
 
             Assert.Throws<ArgumentException>(delegate { LiteByteCapsule lite = new LiteByteCapsule(CapsuleConstant.GenerateCapsulationConstants(0)); });
         }
+        [Fact]
+        public void ByteArrayConstructor_Base()
+        {
+            byte[] firstPart = new byte[rnd.Next(1000)];
+            byte[] lastPart = new byte[rnd.Next(1000)];
+            for(int i = 0; i < firstPart.Length; i++)
+            {
+                firstPart[i] =(byte)rnd.Next(256);
+            }
+            for (int i = 0; i < lastPart.Length; i++)
+            {
+                lastPart[i] = (byte)rnd.Next(256);
+            }
+            LiteByteCapsule lite = new LiteByteCapsule(firstPart, lastPart);
+            Assert.NotNull(lite.GetCapsulationConstants());
+            Assert.Equal(firstPart.Length + lastPart.Length, lite.GetCapsulationConstants().Count);
+           
+
+        }
 
 
-    }
+
+        }
 }
