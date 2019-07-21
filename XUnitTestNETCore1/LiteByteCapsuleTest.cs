@@ -53,7 +53,18 @@ namespace XUnitTestNETCore1
            
 
         }
+        [Fact]
+        public void ConvertToString_Base()
+        {
+            byte[] pack={12,0,14,255,131};
+            string st=LiteByteCapsule.ConvertToString(pack);
+            Assert.NotNull(st);
+            Assert.IsType<String>(st);
+            Assert.NotEmpty(st);
+            Assert.StartsWith("1", st.Substring(0));
+            Assert.EndsWith("1", st.Substring(st.Length-1));
 
+        }
 
 
         }
