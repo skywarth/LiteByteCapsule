@@ -82,11 +82,14 @@ namespace XUnitTestNETCore1
         {
             Stack<CapsuleConstant> capsulationConstants;
             Random rnd = new Random();
-            int amout = rnd.Next(0, 100);
-            capsulationConstants=CapsuleConstant.GenerateCapsulationConstants(amout);
+            int amount = rnd.Next(0, 100);
+            capsulationConstants=CapsuleConstant.GenerateCapsulationConstants(amount);
             Assert.NotNull(capsulationConstants);
-            Assert.NotEmpty(capsulationConstants);
-            
+            if(amount!=0)
+            {
+                Assert.NotEmpty(capsulationConstants);
+            }
+
         }
 
     }
