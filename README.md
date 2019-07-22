@@ -29,11 +29,18 @@ constants.Push(new CapsuleConstant(121, 1, false));
 constants.Push(new CapsuleConstant(31, 2, false));
 constants.Push(new CapsuleConstant(54, 3, false));
 ```
-
 ### CapsuleConstant instances has these properties by order
+
 ```
 new CapsuleConstant(byteValue,position,startFromTheHead);
 ```
+
+### Or create constant stack by random constants using:
+```
+Stack<CapsuleConstant> constants=CapsuleConstant.GenerateCapsulationConstants(amount);
+```
+This will create you a stack of constants which has random values. Since the positioning is dynamic, you won't have to worry about positions of constants in the capsule.
+
 
 ### Create LiteByteCapsule instance, constants variable is a stack of CapsuleConstant instances
 ```
@@ -44,11 +51,13 @@ LiteByteCapsule lite=new LiteByteCapsule(constants);
 ```
 byte[] capsule=lite.ConvertToSyntax(innerPackage);
 ```
+Converts the given byte array to capsule using capsule constant stack passed to constructor of LiteByteCapsule.
 
 ### Check syntax (decapsulation)
 ```
 byte[] innerPackage=lite.CheckSyntax(capsule);
 ```
+CheckSyntax returns null incase the capsule syntax doesn't match designated capsule constant sequence. Basically null return means imposter package.
 
 ### Convert byte array to string
 ```
