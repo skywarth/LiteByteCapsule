@@ -140,6 +140,15 @@ namespace XUnitTestNETCore1
             Assert.Throws<ArgumentException>(delegate { lite.CheckSyntax(capsule); });
         }
 
+        [Fact]
+        public void CheckSyntax_Imposter()
+        {
+            int amount = 100;
+            LiteByteCapsule lite = new LiteByteCapsule(CapsuleConstant.GenerateCapsulationConstants(amount));
+            byte[] capsule = {23,55,123,33,98,235};
+            Assert.Null(lite.CheckSyntax(capsule));
+        }
+
 
 
     }

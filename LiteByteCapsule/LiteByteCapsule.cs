@@ -71,11 +71,11 @@ namespace LiteByte
         }
 
 
-        private static byte ComputeAdditionChecksum(byte[] data)
+        /*private static byte ComputeAdditionChecksum(byte[] data)
         {
             long longSum = data.Sum(x => (long)x);//long overflow engellemek için (uzun bir streamde)
             return unchecked((byte)longSum);
-        }
+        }*/
 
         //DONE Make an overload method or new method for random constant creation based on number provided. (for ex: 100 random constants)
 
@@ -93,6 +93,9 @@ namespace LiteByte
             else if (capsule.Length==0)
             {
                 throw new ArgumentException("Capsule parameter cannot be empty.", "capsule");
+            }//Method for saving or recovering constants from JSON file
+            else if (capsule.Length <= capsulationConstants.Count) {
+                return null;
             }
             byte[] infactData = new byte[capsule.Length - capsulationConstants.Count];
             byte[] capsuleClone = new byte[capsule.Length];
@@ -214,10 +217,6 @@ namespace LiteByte
         /// <returns>Returns capsulation constants stack.</returns>
         public Stack<CapsuleConstant> GetCapsulationConstants()
         {
-            if(capsulationConstants==null)
-            {
-                throw new NullReferenceException("CapsulationConstants stack is null");
-            }
             return capsulationConstants;
         }
         private static Stack<T> StackClone<T>(Stack<T> original)
