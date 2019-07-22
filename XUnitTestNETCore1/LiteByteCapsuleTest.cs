@@ -66,6 +66,32 @@ namespace XUnitTestNETCore1
 
         }
 
+        [Fact]
+        public void ConvertToString_Null()
+        {
+            Assert.Throws<ArgumentNullException>(delegate { LiteByteCapsule.ConvertToString(null); });
+
+        }
+
+
+        [Fact]
+        public void ConvertToSyntax_Base()
+        {
+            int amount = 100;
+            byte[] pack = { 12, 0, 14, 255, 131 };
+            LiteByteCapsule lite = new LiteByteCapsule(CapsuleConstant.GenerateCapsulationConstants(amount));
+            byte[] capsule=lite.ConvertToSyntax(pack);
+            Assert.NotNull(capsule);
+            Assert.Equal(pack.Length + amount, capsule.Length);
+            Assert.NotEmpty(capsule);
+            Assert.NotSame(pack, capsule);
+            Assert.NotEqual(pack, capsule);
+            Assert.Contains<byte>(pack[0], capsule);
+            
+        }
+
+
+
 
         }
 }
