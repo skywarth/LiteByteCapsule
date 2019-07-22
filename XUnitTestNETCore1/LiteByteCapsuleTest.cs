@@ -149,6 +149,15 @@ namespace XUnitTestNETCore1
             Assert.Null(lite.CheckSyntax(capsule));
         }
 
+        [Fact]
+        public void CheckSyntax_Imposter_SameLength()
+        {
+            int amount = 5;
+            LiteByteCapsule lite = new LiteByteCapsule(CapsuleConstant.GenerateCapsulationConstants(amount));
+            byte[] capsule = { 23, 55, 123, 33, 98, 235,33,99,52 };
+            Assert.Null(lite.CheckSyntax(capsule));
+        }
+
 
 
     }
