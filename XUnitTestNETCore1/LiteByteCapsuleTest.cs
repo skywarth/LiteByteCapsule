@@ -73,7 +73,6 @@ namespace XUnitTestNETCore1
 
         }
 
-
         [Fact]
         public void ConvertToSyntax_Base()
         {
@@ -90,8 +89,58 @@ namespace XUnitTestNETCore1
             
         }
 
-
-
+        [Fact]
+        public void ConvertToSyntax_Null()
+        {
+            int amount = 100;
+            LiteByteCapsule lite = new LiteByteCapsule(CapsuleConstant.GenerateCapsulationConstants(amount));
+            Assert.Throws<ArgumentNullException>(delegate { lite.ConvertToSyntax(null); });
 
         }
+        [Fact]
+        public void ConvertToSyntax_Empty()
+        {
+            int amount = 100;
+            byte[] pack = { };
+            LiteByteCapsule lite = new LiteByteCapsule(CapsuleConstant.GenerateCapsulationConstants(amount));
+            byte[] capsule=lite.ConvertToSyntax(pack);
+            Assert.NotNull(capsule);
+            Assert.NotEmpty(capsule);
+            Assert.Equal(amount, capsule.Length);
+        }
+
+        [Fact]
+        public void CheckSyntax_Base()
+        {
+            int amount = 100;
+            LiteByteCapsule lite = new LiteByteCapsule(CapsuleConstant.GenerateCapsulationConstants(amount));
+            byte[] package = { 99, 0, 255, 12, 33, 54, 123 };
+            byte[] capsule=lite.ConvertToSyntax(package);
+            byte[] inner=lite.CheckSyntax(capsule);
+            Assert.NotNull(inner);
+            Assert.NotEmpty(inner);
+            Assert.Equal(inner.Length, package.Length);
+            Assert.Equal(package, inner);
+
+        }
+        [Fact]
+        public void CheckSyntax_Null()
+        {
+            int amount = 100;
+            LiteByteCapsule lite = new LiteByteCapsule(CapsuleConstant.GenerateCapsulationConstants(amount));
+            Assert.Throws<ArgumentNullException>(delegate { lite.CheckSyntax(null); });
+        }
+
+        [Fact]
+        public void CheckSyntax_Empty()
+        {
+            int amount = 100;
+            LiteByteCapsule lite = new LiteByteCapsule(CapsuleConstant.GenerateCapsulationConstants(amount));
+            byte[] capsule = { };
+            Assert.Throws<ArgumentException>(delegate { lite.CheckSyntax(capsule); });
+        }
+
+
+
+    }
 }

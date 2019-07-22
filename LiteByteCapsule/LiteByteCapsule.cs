@@ -86,6 +86,14 @@ namespace LiteByte
         /// <returns></returns>
         public byte[] CheckSyntax(byte[] capsule)
         {
+            if (capsule == null)
+            {
+                throw new ArgumentNullException("capsule", "Byte array parameter capsule cannot be null.");
+            }
+            else if (capsule.Length==0)
+            {
+                throw new ArgumentException("Capsule parameter cannot be empty.", "capsule");
+            }
             byte[] infactData = new byte[capsule.Length - capsulationConstants.Count];
             byte[] capsuleClone = new byte[capsule.Length];
             Array.Copy(capsule, capsuleClone, capsule.Length);
@@ -143,6 +151,10 @@ namespace LiteByte
         /// <returns></returns>
         public byte[] ConvertToSyntax(byte[] infactData)
         {
+            if (infactData == null)
+            {
+                throw new ArgumentNullException("infactData", "Byte array parameter infactData cannot be null");
+            }
             Stack<CapsuleConstant> capsuleConstantsClone = StackClone<CapsuleConstant>(capsulationConstants);
             int capsuleSize = infactData.Length + capsuleConstantsClone.Count;
             byte[] capsule = new byte[capsuleSize];
