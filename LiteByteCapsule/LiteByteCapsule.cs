@@ -32,7 +32,6 @@ namespace LiteByte
             {
                 throw new ArgumentException("Stack parameter cannot be empty","constants");
             }
-            
             capsulationConstants = StackClone<CapsuleConstant>(constants);
         }
 
@@ -93,7 +92,7 @@ namespace LiteByte
             else if (capsule.Length==0)
             {
                 throw new ArgumentException("Capsule parameter cannot be empty.", "capsule");
-            }//Method for saving or recovering constants from JSON file
+            }//TODO Method for saving or recovering constants from JSON file
             else if (capsule.Length <= capsulationConstants.Count) {
                 return null;
             }
