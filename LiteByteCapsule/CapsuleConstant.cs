@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
+using System.Security.Cryptography;
 
 
 namespace LiteByte{
@@ -13,6 +10,7 @@ namespace LiteByte{
      /// </summary>
     public class CapsuleConstant : IComparable<CapsuleConstant>
     {
+        private static RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider();
         private byte val;
         private int position;//0 is first 
         private bool head;
@@ -80,6 +78,11 @@ namespace LiteByte{
                 throw new ArgumentOutOfRangeException();
             }
             Stack<CapsuleConstant> capsuleConstants = new Stack<CapsuleConstant>();
+
+            byte[] randomHolder = new byte[1];
+            
+            
+
             Random rnd = new Random();
             int headCounter = -1;
             int tailCounter = -1;
@@ -87,7 +90,7 @@ namespace LiteByte{
             
             for (int i = 0; i < amount; i++)
             {//TODO stack to string conversion for console writeline, string
-                
+                rngCsp.GetBytes(randomHolder);
                 if (rnd.NextDouble() >= 0.5)
                 {
                     head = true;
@@ -100,7 +103,7 @@ namespace LiteByte{
                     tailCounter++;
                     //TODO method for searching capsulation stack for certain stuff
                 }
-                capsuleConstants.Push(new CapsuleConstant((byte)(rnd.Next(0, 255)), headCounter, tailCounter, head));
+                capsuleConstants.Push(new CapsuleConstant(randomHolder[0], headCounter, tailCounter, head));
 
             }
 

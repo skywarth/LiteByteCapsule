@@ -31,10 +31,6 @@ namespace XUnitTestNETCore1
             Assert.Equal(constantObj1, constantObj2);
             Assert.InRange(constantObj1.Val, 0, 255);
             Assert.InRange(constantObj1.Position, 0, int.MaxValue);
-
-
-
-
         }
         [Fact]
         public void BaseConstructor_Negative()

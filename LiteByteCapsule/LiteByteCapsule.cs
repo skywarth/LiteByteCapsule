@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+
 namespace LiteByte
 {
 
@@ -225,9 +226,8 @@ namespace LiteByte
                 original.CopyTo(arr, 0);
                 Array.Reverse(arr);
                 return new Stack<T>(arr);
-            
-            
         }
+
 
     }
 }
