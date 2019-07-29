@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Force.Crc32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -228,6 +229,20 @@ namespace LiteByte
                 return new Stack<T>(arr);
         }
 
+
+        public static string GenerateCRC32C(byte[] package)
+        {
+            String crc = String.Format("0x{0:X}", Crc32CAlgorithm.Compute(package));
+            return crc;
+        }
+
+        public static byte[] AddCRC32CToEnd(byte[] package)
+        {
+            byte[] newPackage = new byte[package.Length + 4];
+            Array.Copy(package, 0, newPackage, 0, package.Length);
+            Crc32CAlgorithm.ComputeAndWriteToEnd(newPackage);
+            return newPackage;
+        }
 
     }
 }
