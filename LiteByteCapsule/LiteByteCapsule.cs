@@ -229,13 +229,23 @@ namespace LiteByte
                 return new Stack<T>(arr);
         }
 
-
+        /// <summary>
+        /// Used to generate the CRC32-C hash of a given byte array. Returns CRC32-C hash in hex string format.
+        /// </summary>
+        /// <param name="package">Byte array to calculate CRC32-C.</param>
+        /// <returns>CRC32-C hash in hex string format.</returns>
         public static string GenerateCRC32C(byte[] package)
         {
             String crc = String.Format("0x{0:X}", Crc32CAlgorithm.Compute(package));
             return crc;
         }
 
+
+        /// <summary>
+        /// Calculates and adds the CRC32-C of an byte array to the end of the array. Doesn't overwrite, returns new byte array with original size + 4
+        /// </summary>
+        /// <param name="package">Byte array to calculate CRC32-C.</param>
+        /// <returns>Returns byte array with size of original array + 4. Last 4 elements are CRC32-C.</returns>
         public static byte[] AddCRC32CToEnd(byte[] package)
         {
             byte[] newPackage = new byte[package.Length + 4];
