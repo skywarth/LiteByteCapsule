@@ -159,6 +159,29 @@ namespace XUnitTestNETCore1
         }
 
 
+        [Fact]
+        public void GenerateCRC32C_Base()
+        {
+            byte[] exArray1 = { 255 };
+            string crc1=LiteByteCapsule.GenerateCRC32C(exArray1);
+            Assert.NotNull(crc1);
+            Assert.NotEmpty(crc1);
+            Assert.Equal("0xFF000000", crc1);
+        }//TODO generateCRC32C_same()
+
+        [Fact]
+        public void GenerateCRC32C_Same()
+        {
+            byte[] exArray1 = { 255 };
+            byte[] exArray2 = { 0xFF };
+            string crc1 = LiteByteCapsule.GenerateCRC32C(exArray1);
+            string crc2 = LiteByteCapsule.GenerateCRC32C(exArray1);
+            Assert.NotNull(crc1);
+            Assert.NotNull(crc2);
+            Assert.Equal(crc1, crc2);
+            
+        }
+
 
     }
 }

@@ -96,7 +96,7 @@ namespace LiteByte{
                     head = true;
                     headCounter++;
                     
-                }
+                }//TODO unit test for Crypto randomizer imp
                 else
                 {
                     head = false;
