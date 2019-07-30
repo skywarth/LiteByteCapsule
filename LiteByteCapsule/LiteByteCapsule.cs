@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 
 
@@ -13,7 +14,7 @@ namespace LiteByte
     /// </summary>
     public class LiteByteCapsule
     {
-
+        private static RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider();
         private Stack<CapsuleConstant> capsulationConstants;
         /// <summary>
         /// Base overload of costructor for LiteByteCapsule. 
@@ -253,6 +254,43 @@ namespace LiteByte
             Crc32CAlgorithm.ComputeAndWriteToEnd(newPackage);
             return newPackage;
         }
+
+        public static byte[] CheckCRC32CIntegrity(byte[] package)
+        {
+            if (package == null)
+            {
+                throw new ArgumentNullException("package", "Null byte array is not valid parameter for this method.");
+            }
+            else if (package.Length < 4)
+            {
+                throw new ArgumentException("Parameter length/size cannot be less than 4","package");
+            }
+            
+            bool status = false;
+            byte[] subPackage = new byte[package.Length - 4];
+            Array.Copy(package, 0, subPackage, 0, subPackage.Length);
+            status = Enumerable.SequenceEqual(AddCRC32CToEnd(subPackage), package);
+            if (status)
+            {
+                
+            }
+            else
+            {
+                subPackage = null;
+            }
+            return subPackage;
+        }
+
+
+
+
+        public static byte[] GetRandomPackage(uint count)
+        {
+            byte[] package = new byte[count];
+            rngCsp.GetBytes(package);
+            return package;
+        }
+
 
     }
 }
