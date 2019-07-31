@@ -10,7 +10,7 @@ namespace LiteByte{
      /// </summary>
     public class CapsuleConstant : IComparable<CapsuleConstant>
     {
-        private static RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider();
+        private static readonly RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider();
         private byte val;
         private int position;//0 is first 
         private bool head;
@@ -89,19 +89,18 @@ namespace LiteByte{
             bool head;
             
             for (int i = 0; i < amount; i++)
-            {//TODO stack to string conversion for console writeline, string
+            {//DONE stack to string conversion for console writeline, string
                 rngCsp.GetBytes(randomHolder);
                 if (rnd.NextDouble() >= 0.5)
                 {
                     head = true;
                     headCounter++;
                     
-                }//TODO unit test for Crypto randomizer imp
+                }//TEST Crypto randomizer imp
                 else
                 {
                     head = false;
                     tailCounter++;
-                    //TODO method for searching capsulation stack for certain stuff
                 }
                 capsuleConstants.Push(new CapsuleConstant(randomHolder[0], headCounter, tailCounter, head));
 

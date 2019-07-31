@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-
+using Newtonsoft.Json;
 
 namespace LiteByte
 {
@@ -14,7 +14,7 @@ namespace LiteByte
     /// </summary>
     public class LiteByteCapsule
     {
-        private static RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider();
+        private static readonly RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider();
         private Stack<CapsuleConstant> capsulationConstants;
         /// <summary>
         /// Base overload of costructor for LiteByteCapsule. 
@@ -26,7 +26,7 @@ namespace LiteByte
              * capsulationConstants = constants;
              * Old, guess it's referencing, not copying
              **/
-             //TODO null check
+             //DONE null check
              if(constants==null)
             {
                 throw new ArgumentNullException("constants", "Stack parameter cannot be null");
@@ -37,9 +37,6 @@ namespace LiteByte
             }
             capsulationConstants = StackClone<CapsuleConstant>(constants);
         }
-
-
-
         /// <summary>
         /// This overload of constructor takes two different byte arrays to convert into CapsuleConstant type of stack.
         /// If you need to access capsulation constants stack, just call GetCapsulationConstants() to get the stack.
@@ -49,27 +46,49 @@ namespace LiteByte
         public LiteByteCapsule(byte[] constantFirstPart, byte[] constantLastPart)
         {
             capsulationConstants = new Stack<CapsuleConstant>();
-            
-            
+
+
             byte[] joint = new byte[constantFirstPart.Length + constantLastPart.Length];
             if (constantFirstPart != null)
             {
-                for(int i = 0; i < constantFirstPart.Length; i++)
-                {//TODO individual null check
+                for (int i = 0; i < constantFirstPart.Length; i++)
+                {
                     capsulationConstants.Push(new CapsuleConstant(constantFirstPart[i], i, true));
                 }
             }
-            
+
             //TODO create a method for smart capsule constant creation
             if (constantLastPart != null)
             {
-                for(int k = 0; k < constantLastPart.Length; k++)
-                { 
-                    capsulationConstants.Push(new CapsuleConstant(constantLastPart[k], (joint.Length-1)-k,false));
+                for (int k = 0; k < constantLastPart.Length; k++)
+                {
+                    capsulationConstants.Push(new CapsuleConstant(constantLastPart[k], (joint.Length - 1) - k, false));
                 }
             }
-            
-            
+
+
+        }
+
+
+        public LiteByteCapsule()
+        {
+            capsulationConstants = null;
+        }
+
+        private void SmartCapsule(byte[] infactData)
+        {
+            capsulationConstants = new Stack<CapsuleConstant>();
+            capsulationConstants.Push(new CapsuleConstant(0, 0, true));
+            capsulationConstants.Push(new CapsuleConstant((byte)infactData.Length, 1, true));
+        }
+
+        public static byte[] StringToByteArray(String hex)
+        {
+            int NumberChars = hex.Length;
+            byte[] bytes = new byte[NumberChars / 2];
+            for (int i = 0; i < NumberChars; i += 2)
+                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            return bytes;
         }
 
 
@@ -156,9 +175,15 @@ namespace LiteByte
         /// <returns></returns>
         public byte[] ConvertToSyntax(byte[] infactData)
         {
+            bool smartCapsule = false;
             if (infactData == null)
             {
                 throw new ArgumentNullException("infactData", "Byte array parameter infactData cannot be null");
+            }
+            if (capsulationConstants == null)
+            {
+                SmartCapsule(infactData);
+                smartCapsule = true;
             }
             Stack<CapsuleConstant> capsuleConstantsClone = StackClone<CapsuleConstant>(capsulationConstants);
             int capsuleSize = infactData.Length + capsuleConstantsClone.Count;
@@ -182,7 +207,10 @@ namespace LiteByte
             //DONE add overload for stack to stack, create array to stack UNDONE
             CapsuleConstant maxHead = (from x in capsulationConstants where x.Head == true select x).Max();
             Array.Copy(infactData, 0, capsule, maxHead.Position + 1, infactData.Length);
-
+            if(smartCapsule)
+            {
+                capsule = AddCRC32CToEnd(capsule);
+            }
             return capsule;
         }
 
@@ -213,6 +241,16 @@ namespace LiteByte
             
             return bld.ToString();
         }
+
+        /// <summary>
+        /// Returns the Stack of "CapsulationConstant" instances in string form as JSON format.
+        /// </summary>
+        /// <returns>String in JSON format</returns>
+        public string CapsulationConstantsJSONString()
+        {
+            return JsonConvert.SerializeObject(capsulationConstants, Formatting.Indented);
+        }//TEST capsulation stack to json string
+
         /// <summary>
         /// A helper method to get the capsulation constants stack.
         /// </summary>
@@ -270,11 +308,7 @@ namespace LiteByte
             byte[] subPackage = new byte[package.Length - 4];
             Array.Copy(package, 0, subPackage, 0, subPackage.Length);
             status = Enumerable.SequenceEqual(AddCRC32CToEnd(subPackage), package);
-            if (status)
-            {
-                
-            }
-            else
+            if (!status)
             {
                 subPackage = null;
             }

@@ -249,5 +249,20 @@ namespace XUnitTestNETCore1
         {
             Assert.Throws<ArgumentNullException>(delegate { LiteByteCapsule.CheckCRC32CIntegrity(null); });
         }
+
+
+        [Fact]
+        public void SmartCapsuleConstructor_Base()
+        {
+            int length = 300;
+            byte[] package = LiteByteCapsule.GetRandomPackage((uint)length);
+            LiteByteCapsule lite = new LiteByteCapsule();
+            byte[] capsule=lite.ConvertToSyntax(package);
+            Assert.NotNull(capsule);
+            Assert.NotEmpty(capsule);
+            Assert.Equal(length + 6, capsule.Length);
+
+        }
+
     }
 }
