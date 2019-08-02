@@ -17,7 +17,7 @@ Check Github repo for code coverage status.
 
 
 Implementation of random constant stack is ready for test.</PackageReleaseNotes>
-    <Version>1.1.5</Version>
+    <Version>1.1.6</Version>
     <PackageIconUrl>https://raw.githubusercontent.com/skywarth/LiteByteCapsule/LibraryVersion/medicines.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/skywarth/LiteByteCapsule</PackageProjectUrl>
   </PropertyGroup>
