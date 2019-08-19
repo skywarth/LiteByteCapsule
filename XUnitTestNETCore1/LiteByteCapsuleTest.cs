@@ -32,16 +32,16 @@ namespace XUnitTestNETCore1
         public void BaseConstructor_Empty()
         {
 
-            Assert.Throws<ArgumentException>(delegate {new LiteByteCapsule(CapsuleConstant.GenerateCapsulationConstants(0)); });
+            Assert.Throws<ArgumentException>(delegate { new LiteByteCapsule(CapsuleConstant.GenerateCapsulationConstants(0)); });
         }
         [Fact]
         public void ByteArrayConstructor_Base()
         {
             byte[] firstPart = new byte[rnd.Next(1000)];
             byte[] lastPart = new byte[rnd.Next(1000)];
-            for(int i = 0; i < firstPart.Length; i++)
+            for (int i = 0; i < firstPart.Length; i++)
             {
-                firstPart[i] =(byte)rnd.Next(256);
+                firstPart[i] = (byte)rnd.Next(256);
             }
             for (int i = 0; i < lastPart.Length; i++)
             {
@@ -50,19 +50,19 @@ namespace XUnitTestNETCore1
             LiteByteCapsule lite = new LiteByteCapsule(firstPart, lastPart);
             Assert.NotNull(lite.GetCapsulationConstants());
             Assert.Equal(firstPart.Length + lastPart.Length, lite.GetCapsulationConstants().Count);
-           
+
 
         }
         [Fact]
         public void ConvertToString_Base()
         {
-            byte[] pack={12,0,14,255,131};
-            string st=LiteByteCapsule.ConvertToString(pack);
+            byte[] pack = { 12, 0, 14, 255, 131 };
+            string st = LiteByteCapsule.ConvertToString(pack);
             Assert.NotNull(st);
             Assert.IsType<String>(st);
             Assert.NotEmpty(st);
             Assert.StartsWith("1", st.Substring(0));
-            Assert.EndsWith("1", st.Substring(st.Length-1));
+            Assert.EndsWith("1", st.Substring(st.Length - 1));
 
         }
 
@@ -79,14 +79,14 @@ namespace XUnitTestNETCore1
             int amount = 100;
             byte[] pack = { 12, 0, 14, 255, 131 };
             LiteByteCapsule lite = new LiteByteCapsule(CapsuleConstant.GenerateCapsulationConstants(amount));
-            byte[] capsule=lite.ConvertToSyntax(pack);
+            byte[] capsule = lite.ConvertToSyntax(pack);
             Assert.NotNull(capsule);
             Assert.Equal(pack.Length + amount, capsule.Length);
             Assert.NotEmpty(capsule);
             Assert.NotSame(pack, capsule);
             Assert.NotEqual(pack, capsule);
             Assert.Contains<byte>(pack[0], capsule);
-            
+
         }
 
         [Fact]
@@ -103,7 +103,7 @@ namespace XUnitTestNETCore1
             int amount = 100;
             byte[] pack = { };
             LiteByteCapsule lite = new LiteByteCapsule(CapsuleConstant.GenerateCapsulationConstants(amount));
-            byte[] capsule=lite.ConvertToSyntax(pack);
+            byte[] capsule = lite.ConvertToSyntax(pack);
             Assert.NotNull(capsule);
             Assert.NotEmpty(capsule);
             Assert.Equal(amount, capsule.Length);
@@ -115,8 +115,8 @@ namespace XUnitTestNETCore1
             int amount = 100;
             LiteByteCapsule lite = new LiteByteCapsule(CapsuleConstant.GenerateCapsulationConstants(amount));
             byte[] package = { 99, 0, 255, 12, 33, 54, 123 };
-            byte[] capsule=lite.ConvertToSyntax(package);
-            byte[] inner=lite.CheckSyntax(capsule);
+            byte[] capsule = lite.ConvertToSyntax(package);
+            byte[] inner = lite.CheckSyntax(capsule);
             Assert.NotNull(inner);
             Assert.NotEmpty(inner);
             Assert.Equal(inner.Length, package.Length);
@@ -145,7 +145,7 @@ namespace XUnitTestNETCore1
         {
             int amount = 100;
             LiteByteCapsule lite = new LiteByteCapsule(CapsuleConstant.GenerateCapsulationConstants(amount));
-            byte[] capsule = {23,55,123,33,98,235};
+            byte[] capsule = { 23, 55, 123, 33, 98, 235 };
             Assert.Null(lite.CheckSyntax(capsule));
         }
 
@@ -154,7 +154,7 @@ namespace XUnitTestNETCore1
         {
             int amount = 5;
             LiteByteCapsule lite = new LiteByteCapsule(CapsuleConstant.GenerateCapsulationConstants(amount));
-            byte[] capsule = { 23, 55, 123, 33, 98, 235,33,99,52 };
+            byte[] capsule = { 23, 55, 123, 33, 98, 235, 33, 99, 52 };
             Assert.Null(lite.CheckSyntax(capsule));
         }
 
@@ -163,7 +163,7 @@ namespace XUnitTestNETCore1
         public void GenerateCRC32C_Base()
         {
             byte[] exArray1 = { 255 };
-            string crc1=LiteByteCapsule.GenerateCRC32C(exArray1);
+            string crc1 = LiteByteCapsule.GenerateCRC32C(exArray1);
             Assert.NotNull(crc1);
             Assert.NotEmpty(crc1);
             Assert.Equal("0xFF000000", crc1);
@@ -191,7 +191,7 @@ namespace XUnitTestNETCore1
         public void GenerateCRC32C_Empty()
         {
             byte[] package = { };
-            string hex=LiteByteCapsule.GenerateCRC32C(package);
+            string hex = LiteByteCapsule.GenerateCRC32C(package);
             Assert.NotNull(hex);
             Assert.NotEmpty(hex);
             Assert.StartsWith("0x", hex);
@@ -200,7 +200,7 @@ namespace XUnitTestNETCore1
         [Fact]
         public void AddCRC32CToEnd_Base()
         {
-            byte[] package =LiteByteCapsule.AddCRC32CToEnd(LiteByteCapsule.GetRandomPackage(100));
+            byte[] package = LiteByteCapsule.AddCRC32CToEnd(LiteByteCapsule.GetRandomPackage(100));
             Assert.NotNull(package);
             Assert.NotEmpty(package);
             Assert.True(package.Length == 104);
@@ -214,13 +214,13 @@ namespace XUnitTestNETCore1
             byte[] newPackage1 = LiteByteCapsule.AddCRC32CToEnd(package);
             byte[] newPackage2 = LiteByteCapsule.AddCRC32CToEnd(package);
             Assert.Equal(newPackage1, newPackage2);
-            
+
         }
         [Fact]
         public void CheckCRC32CIntegrity_Base()
         {
             byte[] package = LiteByteCapsule.GetRandomPackage(100);
-            byte[] capsule=LiteByteCapsule.AddCRC32CToEnd(package);
+            byte[] capsule = LiteByteCapsule.AddCRC32CToEnd(package);
             byte[] subPackage = LiteByteCapsule.CheckCRC32CIntegrity(capsule);
             Assert.NotNull(subPackage);
             Assert.NotEmpty(subPackage);
@@ -257,12 +257,21 @@ namespace XUnitTestNETCore1
             int length = 300;
             byte[] package = LiteByteCapsule.GetRandomPackage((uint)length);
             LiteByteCapsule lite = new LiteByteCapsule();
-            byte[] capsule=lite.ConvertToSyntax(package);
+            byte[] capsule = lite.ConvertToSyntax(package);
             Assert.NotNull(capsule);
             Assert.NotEmpty(capsule);
             Assert.Equal(length + 6, capsule.Length);
 
         }
 
+        [Fact]
+        public void CapsulationConstantsJSONString_Base()
+        {
+            LiteByteCapsule lite = new LiteByteCapsule(CapsuleConstant.GenerateCapsulationConstants(50));
+            string json=lite.CapsulationConstantsJSONString();
+            Assert.NotNull(json);
+            Assert.NotEmpty(json);
+            //FIXME this sucks, do a proper unit testing for this method.
+        }
     }
 }
