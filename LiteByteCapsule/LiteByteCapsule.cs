@@ -70,6 +70,9 @@ namespace LiteByte
         }
 
 
+        /// <summary>
+        /// Base constructor of LiteByteCapsule. Used in order to create capsule using "Smart Capsule" approach. No constants are needed to be passed. 
+        /// </summary>
         public LiteByteCapsule()
         {
             capsulationConstants = null;
@@ -82,14 +85,6 @@ namespace LiteByte
             capsulationConstants.Push(new CapsuleConstant((byte)infactData.Length, 1, true));
         }
 
-        public static byte[] StringToByteArray(String hex)
-        {
-            int NumberChars = hex.Length;
-            byte[] bytes = new byte[NumberChars / 2];
-            for (int i = 0; i < NumberChars; i += 2)
-                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
-            return bytes;
-        }
 
 
         /*private static byte ComputeAdditionChecksum(byte[] data)
@@ -293,6 +288,12 @@ namespace LiteByte
             return newPackage;
         }
 
+
+        /// <summary>
+        /// Inverse of AddCRC32ToEnd method to extract subpackage from a byte package. 
+        /// </summary>
+        /// <param name="package">Byte package to check the crc32 integrity.</param>
+        /// <returns>Subpackage (inner/actual package)</returns>
         public static byte[] CheckCRC32CIntegrity(byte[] package)
         {
             if (package == null)
@@ -317,7 +318,11 @@ namespace LiteByte
 
 
 
-
+        /// <summary>
+        /// Returns a random byte array/package with designated length.
+        /// </summary>
+        /// <param name="count">Length of the array to be created.</param>
+        /// <returns>Array with given amount of random bytes.</returns>
         public static byte[] GetRandomPackage(uint count)
         {
             byte[] package = new byte[count];
