@@ -25,8 +25,8 @@ LiteByteCapsule is a solution/library to encapsulate your byte array packages be
     4. [Encapsulating a package](#encapsulation)
     5. [Exporting encapsulation constants](#exporting)
     6. [De-encapsulate(validate) a package](#decapsulation)
-    7. [Instance utilities/helpers](#instance)
-    8. [Static utilities/helpers](#static)
+    7. [Instance utilities/helpers](#instance-util)
+    8. [Static utilities/helpers](#static-util)
 4. [Tests](#tests)
 5. [Licence](#licence)
 6. [Old documentation](#old)
@@ -191,7 +191,7 @@ byte[] actualPackage=lite.CheckSyntax(incomingPackage);
 
 
 ```
-### <a name="instance'"></a> Instance utilities/helpers
+### <a name="instance-util'"></a> Instance utilities/helpers
 ```
 //Stack<CapsuleConstant> constants=...
 
@@ -210,7 +210,7 @@ Stack<CapsuleConstant<CapsuleConstant> constants=lite.GetCapsulationConstants();
 
 ```
 
-### <a name="static'"></a> Static utilities/helpers
+### <a name="static-util'"></a> Static utilities/helpers
 ```
 //Generate a random byte array 
 byte[] package=LiteByteCapsule.GetRandomPackage(20);
