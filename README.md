@@ -77,7 +77,7 @@ ___
 CapsuleConstants class consists:
 
 | Name       |Type           |Cool  |
-| ------------- :|:-------------:|:-----|
+| -------------:|:-------------:|:-----|
 | val     | byte|Value property of an CapsuleConstant instance. Byte value for constant.|
 | position     | int      |Position of the constant related to the start position parameter(head). E.g: if position is:0 and head=true, this constant will be the first element in the capsule.|
 | head | bool     |Property to indicate counting for position from start(head) or counting from the end(tail) of the capsule. E.g:Head:false, position:0 will be the last element of the capsule.|
@@ -90,7 +90,7 @@ ___
 
  For encapsulation or decapsulation, you have to create LiteByteCapsule class instance using diverse constructors.
  
- ####**`LiteByteCapsule()`**
+ #### **`LiteByteCapsule()`**
  This constructor is used in order to encapsule/decapsulate byte array packages using SmartCapsule technique.
  
  **Smart encapsulation**
@@ -98,12 +98,13 @@ ___
  | First element      | In between           | Last 4 elements  |
  | :------------- |:-------------:| -----:|
  | 0      | byte[] *| CRC32C **|
+ 
 _*byte[] is your actual byte array._
 
 _**CRC32C is CRC32C calculation of your actual byte array._  
 
  
-  ####**`LiteByteCapsule(Stack<CapsuleConstant> constants)`**
+  #### **`LiteByteCapsule(Stack<CapsuleConstant> constants)`**
   This constructor is used in order to encapsule/decapsulate byte array packages by placing CapsuleConstants into defined positions.
   
   **Encapsulation by CapsuleConstant Stack**
@@ -119,7 +120,7 @@ _**CRC32C is CRC32C calculation of your actual byte array._
  _***Head constants: CapsuleConstants in the stack provided as parameter, which has **head=false** value_
  
  
-   ####**`LiteByteCapsule(byte[] constantFirstPart, byte[] constantLastPart)`**
+   #### **`LiteByteCapsule(byte[] constantFirstPart, byte[] constantLastPart)`**
    This constructor is used in order to encapsule/decapsulate byte array packages by putting constantFirstPart array to the start of the capsule and constantLastPart array to end of the capsule.
    
    **Encapsulation by two byte arrays**
@@ -233,7 +234,7 @@ byte[] actualPackage=LiteByteCapsule.CheckCRC32CIntegrity(package);
 ## Tests
 Please do check Azure Devops linked in the badges section or revise CodeCov code coverage reports to see unit test results.
 
-##Licence
+## Licence
 [(MIT Licence)] [licence]
 
 
