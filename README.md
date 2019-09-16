@@ -13,7 +13,7 @@
 LiteByteCapsule is a solution/library to encapsulate your byte array packages before sending them over certain protocols (TCP-IP, Socket, API, etc.)
 
 
-##Table Of Contents
+## Table Of Contents
 1. Introduction
     1. [But Why ?](#but-why)
     2. [How ?](#how)
@@ -34,7 +34,7 @@ LiteByteCapsule is a solution/library to encapsulate your byte array packages be
 
 
 
-##Introduction
+## Introduction
 ### <a name="but-why"></a> But Why ?
 
 
@@ -45,20 +45,20 @@ When you send your byte arrays on WebSockets (e.g) a connection between sender a
  
 ### <a name="how"></a>How ?
 
-####For sender(client) side
+#### For sender(client) side
 LiteByteCapsule encapsulates your package by adding constants(byte values) at the start and end of your original byte array. In other words, your actual package is contained in between series of byte values. That way, if malicious intended person tries to sniff your by packages they won't have an idea where does the actual package start and end. 
   
-####For receiver(server) side
+#### For receiver(server) side
 Instead of reading all the incoming data/transmission to listening port, use LiteByteCapsule's CheckSyntax() method to drop packages rather fast. It has several measures to prevent reading all the data and stops reading package as soon as one of the measures in syntax doesn't fit. With that, even if somebody sends packages with millions of size, it will be discarded in milliseconds without going through all the package.
 
-##Installation
+## Installation
 Simply initiate this command from your package manager console:
 
 `Install-Package LiteByteCapsule -Version 1.1.6`
 
 Or grab it through NuGet manager by searching "LiteByteCapsule".
 
-#Usage
+# Usage
 ![alt text][diagram]
 
 
@@ -72,7 +72,7 @@ Both encapsulation and decapsulation actions require encapsulation constants to 
 
 
 
-####CapsuleConstants Class
+#### CapsuleConstants Class
 ___
 CapsuleConstants class consists:
 
@@ -230,7 +230,7 @@ byte[] actualPackage=LiteByteCapsule.CheckCRC32CIntegrity(package);
 
 
 ```
-##Tests
+## Tests
 Please do check Azure Devops linked in the badges section or revise CodeCov code coverage reports to see unit test results.
 
 ##Licence
@@ -238,7 +238,7 @@ Please do check Azure Devops linked in the badges section or revise CodeCov code
 
 
 
-##Old Documentation
+## Old Documentation
 
 ### First create a stack of capsulation constants using CapsuleConstant class
 ```
