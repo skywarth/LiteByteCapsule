@@ -191,7 +191,7 @@ byte[] actualPackage=lite.CheckSyntax(incomingPackage);
 
 
 ```
-### <a name="instance-util'"></a> Instance utilities/helpers
+### <a name="instance-util"></a> Instance utilities/helpers
 ```
 //Stack<CapsuleConstant> constants=...
 
@@ -210,7 +210,7 @@ Stack<CapsuleConstant<CapsuleConstant> constants=lite.GetCapsulationConstants();
 
 ```
 
-### <a name="static-util'"></a> Static utilities/helpers
+### <a name="instance-util"></a> Static utilities/helpers
 ```
 //Generate a random byte array 
 byte[] package=LiteByteCapsule.GetRandomPackage(20);
