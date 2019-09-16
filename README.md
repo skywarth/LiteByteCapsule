@@ -210,7 +210,7 @@ Stack<CapsuleConstant<CapsuleConstant> constants=lite.GetCapsulationConstants();
 
 ```
 
-### <a name="instance-util"></a> Static utilities/helpers
+### <a name="static-util"></a> Static utilities/helpers
 ```
 //Generate a random byte array 
 byte[] package=LiteByteCapsule.GetRandomPackage(20);
